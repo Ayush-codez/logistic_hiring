@@ -1,0 +1,31 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files and runtime data
+logs/
+*.log
+npm-debug.log*
+
+# Ignore environment-specific files
+.env
+
+# Ignore build output
+/build/
+
+# Ignore dependencies
+/.sass-cache/
+/bower_components/
+
+# Ignore IDE or editor specific files
+.vscode/
+.idea/
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore editor backup files
+*~
+
+# Ignore npm package files
+package-lock.json
+yarn.lock
