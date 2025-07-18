@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+// todo
+=======
 // controllers/formController.js
 const Submission = require('../models/submissions');
 const mongoose = require('mongoose');
@@ -101,3 +104,4 @@ module.exports = { handleFormSubmission,
     downloadFileById,
     getAllSubmissions
  };
+>>>>>>> efe69e524b89ca71dce39423d443610d8d9fa27c
