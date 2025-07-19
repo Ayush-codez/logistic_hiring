@@ -1,4 +1,4 @@
-
+// controllers/formController.js
 const Submission = require('../models/submissions');
 const path = require('path');
 const fs = require('fs');
@@ -81,9 +81,11 @@ const getAllSubmissions = async (req, res) => {
   }
 };
 
-module.exports = {
-  handleFormSubmission,
-  downloadFileByName,
-  getAllSubmissions,
-};
 
+
+
+
+module.exports = { handleFormSubmission,
+    downloadFileById,
+    getAllSubmissions
+ };
