@@ -1,8 +1,7 @@
-// controllers/formController.js
-const Submission = require('../models/submissions');
-const mongoose = require('mongoose');
-const Grid = require('gridfs-stream');
 
+const Submission = require('../models/submissions');
+const path = require('path');
+const fs = require('fs');
 
 const handleFormSubmission = async (req, res) => {
   try {
@@ -18,7 +17,12 @@ const handleFormSubmission = async (req, res) => {
       website,
     } = req.body;
 
-    const fileId = req.file?.id || null;
+    if (!req.file) {
+      console.error("❌ Multer didn't upload the file.");
+      return res.status(400).json({ error: 'File upload failed.' });
+    }
+
+    const filename = req.file.filename;
 
     const newSubmission = new Submission({
       type,
@@ -26,8 +30,8 @@ const handleFormSubmission = async (req, res) => {
       email,
       phone,
       description,
-      file: fileId, // Store GridFS file ID
-      skills: skills ? skills.split(',') : undefined,
+      file: filename, // ⬅️ store filename
+      skills: skills ? skills.split(',').map(s => s.trim()) : undefined,
       experience,
       companySize,
       website,
@@ -40,33 +44,18 @@ const handleFormSubmission = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Server error while submitting form' });
   }
-  console.log('REQ FILE:', req.file);
-  console.log('REQ BODY:', req.body);
 };
-// let gfs;
-// mongoose.connection.once('open', () => {
-//   gfs = Grid(mongoose.connection.db, mongoose.mongo);
-//   gfs.collection('uploads');
-// });
 
-
-
-
-
-const downloadFileById = async (req, res) => {
+const downloadFileByName = async (req, res) => {
   try {
-    const gfs = req.app.get('gfs'); // ✅ Get from app
-    const fileId = new mongoose.Types.ObjectId(req.params.id);
+    const filename = req.params.filename;
+    const filepath = path.join(__dirname, '../uploads', filename);
 
-    gfs.files.findOne({ _id: fileId }, (err, file) => {
-      if (!file || file.length === 0) {
-        return res.status(404).json({ error: 'No file found' });
-      }
+    if (!fs.existsSync(filepath)) {
+      return res.status(404).json({ error: 'File not found' });
+    }
 
-      const readstream = gfs.createReadStream({ _id: file._id });
-      res.set('Content-Type', file.contentType);
-      return readstream.pipe(res);
-    });
+    res.download(filepath, filename); // Prompt download
   } catch (error) {
     console.error('Error downloading file:', error);
     res.status(500).json({ error: 'Error fetching file' });
@@ -77,14 +66,13 @@ const getAllSubmissions = async (req, res) => {
   try {
     const submissions = await Submission.find().sort({ submittedAt: -1 });
 
-    const fullSubmissions = submissions.map((sub) => {
-      return {
-        ...sub.toObject(),
-        fileDownloadUrl: sub.file
-          ? `${req.protocol}://${req.get('host')}/api/file/${sub.file}`
-          : null,
-      };
-    });
+    const fullSubmissions = submissions.map((sub) => ({
+      ...sub.toObject(),
+      fileDownloadUrl: sub.file
+  ? `${req.protocol}://${req.get('host')}/api/file/${encodeURIComponent(sub.file)}`
+  : null,
+
+    }));
 
     res.json(fullSubmissions);
   } catch (error) {
@@ -93,11 +81,9 @@ const getAllSubmissions = async (req, res) => {
   }
 };
 
+module.exports = {
+  handleFormSubmission,
+  downloadFileByName,
+  getAllSubmissions,
+};
 
-
-
-
-module.exports = { handleFormSubmission,
-    downloadFileById,
-    getAllSubmissions
- };
