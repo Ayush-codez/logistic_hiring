@@ -30,8 +30,12 @@ const handleFormSubmission = async (req, res) => {
       email,
       phone,
       description,
-      file: filename, // ⬅️ store filename
-      skills: skills ? skills.split(',').map(s => s.trim()) : undefined,
+      file: filename,
+      skills: Array.isArray(skills)
+        ? skills
+        : typeof skills === 'string'
+        ? skills.split(',').map(s => s.trim())
+        : [],
       experience,
       companySize,
       website,
@@ -41,10 +45,11 @@ const handleFormSubmission = async (req, res) => {
 
     res.status(201).json({ message: 'Form submitted successfully' });
   } catch (error) {
-    console.error(error);
+    console.error("🔥 Backend error:", error);
     res.status(500).json({ error: 'Server error while submitting form' });
   }
 };
+
 
 const downloadFileByName = async (req, res) => {
   try {
@@ -86,6 +91,6 @@ const getAllSubmissions = async (req, res) => {
 
 
 module.exports = { handleFormSubmission,
-    downloadFileById,
+    downloadFileByName,
     getAllSubmissions
  };
