@@ -96,7 +96,11 @@
 import React, { useState } from "react";
 import { Upload, FileText, Trash2 } from "lucide-react";
 
-const IndividualUpload = ({ onFileChange, onSkillsChange, onExperienceChange }) => {
+const IndividualUpload = ({
+  onFileChange,
+  onSkillsChange,
+  onExperienceChange,
+}) => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
 
@@ -138,19 +142,27 @@ const IndividualUpload = ({ onFileChange, onSkillsChange, onExperienceChange }) 
     <div className="flex flex-col gap-4 mt-6">
       {/* Skills Input */}
       <div>
-        <label className="font-semibold text-base text-gray-800 mb-1">Skills</label>
+        <label className="font-semibold text-base text-gray-800 mb-1">
+          Skills
+        </label>
         <input
           type="text"
           placeholder="E.g., JavaScript, Node.js, React"
           className="w-full border rounded-md px-3 py-2"
-          onChange={(e) => onSkillsChange(e.target.value.split(",").map(skill => skill.trim()))}
+          onChange={(e) =>
+            onSkillsChange(
+              e.target.value.split(",").map((skill) => skill.trim())
+            )
+          }
         />
         <span className="text-xs text-gray-500">Comma-separated values</span>
       </div>
 
       {/* Experience Input */}
       <div>
-        <label className="font-semibold text-base text-gray-800 mb-1">Years of Experience</label>
+        <label className="font-semibold text-base text-gray-800 mb-1">
+          Years of Experience
+        </label>
         <input
           type="number"
           className="w-full border rounded-md px-3 py-2"
@@ -160,7 +172,9 @@ const IndividualUpload = ({ onFileChange, onSkillsChange, onExperienceChange }) 
       </div>
 
       {/* Resume Upload */}
-      <label className="font-semibold text-base text-gray-800 mb-1">Upload Resume</label>
+      <label className="font-semibold text-base text-gray-800 mb-1">
+        Upload Resume
+      </label>
       <div className="relative group border-2 border-blue-400 border-dashed rounded-xl p-6 bg-gradient-to-r from-blue-50 to-blue-100 shadow-md">
         {!file ? (
           <div className="flex flex-col items-center justify-center gap-2">
@@ -176,7 +190,9 @@ const IndividualUpload = ({ onFileChange, onSkillsChange, onExperienceChange }) 
                 className="hidden"
               />
             </label>
-            <span className="text-xs text-gray-500 mt-2">PDF or DOC up to 5MB</span>
+            <span className="text-xs text-gray-500 mt-2">
+              PDF or DOC up to 5MB
+            </span>
           </div>
         ) : (
           <div className="flex items-center justify-between gap-4 bg-white rounded-lg px-4 py-3 shadow-sm border">
@@ -202,4 +218,3 @@ const IndividualUpload = ({ onFileChange, onSkillsChange, onExperienceChange }) 
 };
 
 export default IndividualUpload;
-

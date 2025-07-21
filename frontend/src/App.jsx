@@ -1,30 +1,20 @@
-// import "./App.css";
-// import RegistrationForm from "./pages/RegistrationForm";
-
-// function App() {
-//   return (
-//     <>
-//       <RegistrationForm />
-//     </>
-//   );
-// }
-
-// export default App;
-
-// App.jsx
-import { Routes, Route } from "react-router-dom";
-import RegistrationForm from "./pages/RegistrationForm";
-import Success from "./pages/Success"; // Create this file (next step)
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import IndividualForm from "./pages/IndividualForm";
+import OrganizationForm from "./pages/OrganizationForm";
+import HomePage from "./pages/HomePage";
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<RegistrationForm />} />
-      <Route path="/success" element={<Success />} />
-    </Routes>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/individual" element={<IndividualForm />} />
+        <Route path="/organization" element={<OrganizationForm />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
-
