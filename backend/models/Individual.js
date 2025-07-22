@@ -18,15 +18,13 @@ const individualSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    type: {
-      type: String,
-      default: "Individual",
-    },
+
     description: {
       type: String,
     },
-    resume: {
-      type: String, // store file URL or filename
+    resumeUrl: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }

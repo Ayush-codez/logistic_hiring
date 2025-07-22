@@ -10,10 +10,6 @@ const candidateSchema = new mongoose.Schema({
     required: true,
     lowercase: true,
   },
-  role: {
-    type: String,
-    required: true,
-  },
   experience: {
     type: String,
   },
@@ -38,15 +34,12 @@ const organizationSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    type: {
-      type: String,
-      default: "Organization",
-    },
+
     description: {
       type: String,
     },
     candidates: [candidateSchema],
-    resumeFiles: [String], // optional for additional uploads
+    // resumeFiles: [String], // optional for additional uploads
   },
   { timestamps: true }
 );
