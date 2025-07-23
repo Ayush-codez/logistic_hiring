@@ -96,11 +96,7 @@
 import React, { useState } from "react";
 import { Upload, FileText, Trash2 } from "lucide-react";
 
-const IndividualUpload = ({
-  onFileChange,
-  onSkillsChange,
-  onExperienceChange,
-}) => {
+const IndividualUpload = ({ onFileChange }) => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
 
@@ -141,7 +137,7 @@ const IndividualUpload = ({
   return (
     <div className="flex flex-col gap-4 mt-6">
       {/* Skills Input */}
-      <div>
+      {/* <div>
         <label className="font-semibold text-base text-gray-800 mb-1">
           Skills
         </label>
@@ -156,10 +152,10 @@ const IndividualUpload = ({
           }
         />
         <span className="text-xs text-gray-500">Comma-separated values</span>
-      </div>
+      </div> */}
 
       {/* Experience Input */}
-      <div>
+      {/* <div>
         <label className="font-semibold text-base text-gray-800 mb-1">
           Years of Experience
         </label>
@@ -169,7 +165,7 @@ const IndividualUpload = ({
           min="0"
           onChange={(e) => onExperienceChange(Number(e.target.value))}
         />
-      </div>
+      </div> */}
 
       {/* Resume Upload */}
       <label className="font-semibold text-base text-gray-800 mb-1">
