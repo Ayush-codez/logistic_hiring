@@ -2,6 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
@@ -12,11 +13,17 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cloudinary": "^2.7.0",
     "cors": "^2.8.5",
+    "datauri": "^4.1.0",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "expresss": "^0.0.0",
     "mongoose": "^8.16.4",
-    "multer": "^2.0.2"
+    "multer": "^2.0.2",
+    "streamifier": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
