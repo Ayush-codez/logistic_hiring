@@ -14,7 +14,9 @@ const OrganizationForm = () => {
     resetForm,
   } = useForm();
 
-  // Reset form state when component unmounts or before it mounts
+  // const [type, setType] = useState("org");
+
+  // Reset form state when componstatenmounts or before it mounts
   useEffect(() => {
     resetForm();
   }, [resetForm]);
@@ -29,7 +31,11 @@ const OrganizationForm = () => {
           Organization Registration
         </h2>
 
-        <CommonFields formData={formData} handleChange={handleChange} />
+        <CommonFields
+          formData={formData}
+          handleChange={handleChange}
+          type="org"
+        />
 
         <OrganizationUpload
           candidates={candidates}

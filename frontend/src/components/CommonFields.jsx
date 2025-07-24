@@ -2,18 +2,20 @@
 import React from "react";
 import FormField from "./FormField";
 
-const CommonFields = ({ formData, handleChange }) => {
-  const isOrg = formData.type === "Organization";
-
+const CommonFields = ({ formData, handleChange, type }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-8 rounded-2xl shadow-xl">
       <FormField
-        label={isOrg ? "Organization Name" : "Full Name"}
+        label={type === "org" ? "Organization Name" : "Full Name"}
         name="name"
         icon="name"
         value={formData.name}
         onChange={handleChange}
-        placeholder={isOrg ? "Enter your company name" : "Enter your full name"}
+        placeholder={
+          type === "org"
+            ? "Enter your Organisation name"
+            : "Enter your full name"
+        }
       />
       <FormField
         label="Email"
