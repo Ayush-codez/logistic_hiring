@@ -6,7 +6,7 @@ export const connectDb = async () => {
       dbName: "Logistic",
     });
 
-    console.log("Conected to database");
+    console.log("Connected to database");
   } catch (error) {
     console.log(error);
   }

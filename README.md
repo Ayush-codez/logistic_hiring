@@ -34,8 +34,17 @@ If Individual:
 Skills
 Years of Experience
 
+<<<<<<< HEAD
 If Organization:
 Company Size
 Website
 
 1. hii
+=======
+  If Organization:
+        Company Size
+        Website
+
+
+<!-- heLLO RAVI -->
+>>>>>>> c5bc41711a9f69f22eb8833f5046f0cdf921771b
