@@ -21,7 +21,9 @@
     "expresss": "^0.0.0",
     "mongoose": "^8.16.4",
     "multer": "^2.0.2",
-    "streamifier": "^0.1.1"
+    "pdf-parse": "^1.1.1",
+    "streamifier": "^0.1.1",
+    "textract": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

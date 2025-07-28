@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
 import Individual from "../models/Individual.js";
-// import cloudinary from "../config/cloudinary.js"; ❌ Temporarily disabled
-// import getDataURL from "../utils/urlGenerator.js"; ❌ Not needed now
+import { parseResume } from "../utils/resumeParser.js";
 
+// ⬇️ INDIVIDUAL REGISTER CONTROLLER
 export const registerIndividual = async (req, res) => {
   try {
     const { name, email, phone, description } = req.body;
@@ -15,7 +15,6 @@ export const registerIndividual = async (req, res) => {
         .json({ message: "All fields and resume file are required" });
     }
 
-    // ✅ Normalize path for Windows and Linux compatibility
     const localFilePath = path
       .join("uploads", file.filename)
       .replace(/\\/g, "/");
@@ -34,3 +33,25 @@ export const registerIndividual = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// ⬇️ PARSE RESUME CONTROLLER
+export const handleResumeParse = async (req, res) => {
+  try {
+    const file = req.file;
+
+    if (!file) {
+      return res.status(400).json({ error: "No resume file uploaded" });
+    }
+
+    // ✅ Fix here: use absolute path
+    const filePath = path.resolve("uploads", file.filename);
+
+    const parsedData = await parseResume(filePath, file.mimetype);
+
+    res.status(200).json({ success: true, data: parsedData });
+  } catch (err) {
+    console.error("Resume parsing failed:", err);
+    res.status(500).json({ success: false, message: "Resume parsing failed" });
+  }
+};
+
