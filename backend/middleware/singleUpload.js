@@ -1,9 +1,3 @@
-// // middleware/multer.js
-// import multer from "multer";
-// const storage = multer.memoryStorage();
-// const uploadFile = multer({ storage }).single("resume");
-// export default uploadFile;
-
 import multer from "multer";
 import path from "path";
 import fs from "fs";

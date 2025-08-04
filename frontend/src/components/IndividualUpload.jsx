@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Upload, FileText, Trash2 } from "lucide-react";
 
-const IndividualUpload = ({ onFileChange, onParsedData }) => {
+const IndividualUpload = ({ onFileChange }) => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,29 +33,10 @@ const IndividualUpload = ({ onFileChange, onParsedData }) => {
 
       setFile(selected);
       setError("");
-      onFileChange(e); // Update context
+      onFileChange(e);
 
-      // Parse resume via backend
       const formData = new FormData();
       formData.append("resume", selected);
-
-      try {
-        setLoading(true);
-        const response = await axios.post(
-          "http://localhost:5000/api/individual/parse-resume",
-          formData,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        );
-
-        if (response.data?.success) {
-          onParsedData(response.data.data); // Send parsed data up
-        }
-      } catch (err) {
-        console.error("Resume parsing failed:", err);
-        setError("Failed to parse resume. Please try again.");
-      } finally {
-        setLoading(false);
-      }
     }
   };
 
@@ -76,7 +58,8 @@ const IndividualUpload = ({ onFileChange, onParsedData }) => {
               <Upload className="w-6 h-6 text-blue-500" />
             </div>
             <label className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg cursor-pointer font-semibold flex items-center gap-2">
-              <Upload className="w-4 h-4" /> {loading ? "Parsing..." : "Browse Files"}
+              <Upload className="w-4 h-4" />{" "}
+              {loading ? "Parsing..." : "Browse Files"}
               <input
                 type="file"
                 accept=".pdf,.doc,.docx"

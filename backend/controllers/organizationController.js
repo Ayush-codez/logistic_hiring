@@ -23,7 +23,7 @@ export const registerOrganization = async (req, res) => {
         candidateName: c.candidateName,
         candidateEmail: c.candidateEmail,
         experience: c.experience,
-        file: file.path.replace(/\\/g, "/"), // normalized file path
+        file: `${req.protocol}://${req.get("host")}/uploads/${file.filename}`,
       };
     });
 

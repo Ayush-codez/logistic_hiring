@@ -16,6 +16,7 @@ const initialFormData = {
   name: "",
   email: "",
   phone: "",
+  skills: "",
   description: "",
 };
 
@@ -51,7 +52,15 @@ export const FormProvider = ({ children }) => {
       data.append("name", formData.name);
       data.append("email", formData.email);
       data.append("phone", formData.phone);
-      data.append("description", formData.description);
+      data.append(
+        "skills",
+        formData.skills
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+          .join(",")
+      );
+
       data.append("resume", resumeFile);
 
       try {

@@ -21,15 +21,6 @@ const IndividualForm = () => {
     setResumeFile(file);
   };
 
-  const handleParsedData = (parsed) => {
-    // Loop through each field and update formData
-    if (parsed.name) handleChange({ target: { name: "name", value: parsed.name } });
-    if (parsed.email) handleChange({ target: { name: "email", value: parsed.email } });
-    if (parsed.phone) handleChange({ target: { name: "phone", value: parsed.phone } });
-    if (parsed.skills) handleChange({ target: { name: "skills", value: parsed.skills.join(", ") } });
-    if (parsed.description) handleChange({ target: { name: "description", value: parsed.description } });
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-6 flex justify-center items-start">
       <form
@@ -41,10 +32,7 @@ const IndividualForm = () => {
         </h2>
 
         <CommonFields formData={formData} handleChange={handleChange} />
-        <IndividualUpload
-          onFileChange={handleFileChange}
-          onParsedData={handleParsedData}
-        />
+        <IndividualUpload onFileChange={handleFileChange} />
         <button
           type="submit"
           className="mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow block mx-auto"
